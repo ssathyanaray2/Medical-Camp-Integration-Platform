@@ -6,15 +6,22 @@ During a hackathon at JSS Science and Technology University, my team and I devel
 
 # Features
 User Authentication & Authorization
+
 Admin Dashboard for Camp Management
+
 Patient Medical History Storage
+
 Doctor Search & Matching
+
 Django Models & ORM for Data Handling
+
 Form Handling & Serialization
 
 # Tech Stack
 Backend: Django, Django REST Framework, Python
+
 Database: SQLite/MySQL
+
 Frontend: HTML, CSS, Bootstrap, Javascript
 
 # Instruction to run:

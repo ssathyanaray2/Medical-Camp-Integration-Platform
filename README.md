@@ -2,7 +2,7 @@
 
 
 # Overview
-During a hackathon at JSS Science and Technology University, my team and I developed a web application using Django to assist NGOs in organizing medical camps. The platform enables NGOs to efficiently schedule camps, store and manage patients' medical histories, and connect with qualified doctors. The idea stemmed from firsthand experience attending a medical camp, where we identified key challenges faced by NGOs. Through this project, I gained valuable insights into full-stack development, industry-level coding standards, and real-world problem-solving. we named it sanjeevani described as a magical herb with the power to heal.
+During a hackathon at JSS Science and Technology University, my team and I developed a web application using Django to assist NGOs in organizing medical camps. The platform enables NGOs to efficiently schedule camps, store and manage patients' medical histories, and connect with qualified doctors. The idea stemmed from firsthand experience attending a medical camp, where we identified key challenges faced by NGOs. Through this project, I gained valuable insights into full-stack development, industry-level coding standards, and real-world problem-solving. we named it sanjeevani described as a magical herb with the power to heal. We integrated facebook using facebook sdk so that NGO can upload an image along with infromation as an post. 
 
 # Features
 User Authentication & Authorization

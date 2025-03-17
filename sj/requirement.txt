@@ -1,0 +1,7 @@
+djangorestframework
+django
+mysqlclient
+requests
+facebook-sdk
+Pillow
+

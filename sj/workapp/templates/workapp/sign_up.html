@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="/static/style3.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+
+  <title>Sign Up</title>
+  <script>
+    var m="{{m}}";
+  </script>
+
+  <script>
+    function alertUser(){
+      if(m){
+        alert(m);
+      }
+    }
+  </script>
+  </head>
+
+  <body onload="alertUser()">
+  <!-- background="/static/image4.jpg"-->
+
+
+   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <a class="navbar-brand" href="/">Home</a>
+  </nav>
+    
+	<div class="container-fluid">
+    <div class="row">
+      <section class="col-lg-6 col-md-12">
+        <div class="box">
+        <h4 class="text-primary"> Doctor Sign Up:</h4>
+        <form action="/workapp/docsign/" method="POST"> {% csrf_token %}
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label>Username:</label>
+          {{dform.username}}
+          </div>
+         <div class="form-group col-md-6">
+            <label>Name:</label>
+          {{dform.name}}
+          </div>
+        <div class="form-group col-md-6">
+            <label>Password:</label>
+          {{dform.password}}
+          </div>
+        <div class="form-group col-md-6">
+            <label>Email:</label>
+          {{dform.email}}
+          </div>
+        <div class="form-group col-md-6">
+            <label>City:</label>
+          {{dform.city}}
+          </div>
+        <div class="form-group col-md-6">
+            <label>Phone Number:</label>
+          {{dform.phone}}
+          </div>
+        <div class="form-group col-md-4">
+          <label>Specialization:</label>
+        {{dform.special}}
+        </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Sign Up</button>
+        </form>
+      </div>
+        </section>
+        <section class="col-lg-6 col-md-12">
+          <div class="box">
+        <h4 class="text-primary">NGO Sign Up:</h4>
+        <form action="/workapp/ngosign/" method="POST">  {% csrf_token %}
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label>Username:</label>
+          {{nform.username}}
+          </div>
+         <div class="form-group col-md-6">
+            <label>Name:</label>
+          {{nform.name}}
+          </div>
+        <div class="form-group col-md-6">
+            <label>Password:</label>
+          {{nform.password}}
+          </div>
+        <div class="form-group col-md-6">
+            <label>Email:</label>
+          {{nform.email}}
+          </div>
+        <div class="form-group col-md-6">
+            <label>Website link:</label>
+          {{nform.link}}
+          </div>
+        <div class="form-group col-md-6">
+            <label>Phone Number:</label>
+          {{nform.ph}}
+          </div>
+        <div class="form-group col-md-4">
+          <label>Description:</label>
+          {{nform.text}}
+        
+        </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Sign Up</button>
+        </form>
+      </div>
+        </section>
+
+    </div>
+  </div>
+  </body>
+  
+  <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	</html>
+	
+	
+	

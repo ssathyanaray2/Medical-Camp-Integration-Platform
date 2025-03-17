@@ -1,0 +1,33 @@
+html, body {
+	height: 100%;
+  }
+body{
+	margin:0px;
+	background-color:black;
+	font-family: 'Playfair Display', serif;
+	display: flex;
+  	flex-direction: column;
+}
+.bg-dark {
+    background-color: black!important;
+}
+.navbar-dark .navbar-nav .nav-link{
+    font-size:18px;
+    color: #007bff;
+    cursor: pointer;
+}
+h5,small{
+	color: #007bff;
+}
+
+.main-content{
+	flex: 1 0 auto;
+}
+
+footer{
+	flex-shrink: 0;
+	padding:20px 5px 5px;
+	margin:20px 10px 5px;
+	border-top:1px solid grey;
+	
+}

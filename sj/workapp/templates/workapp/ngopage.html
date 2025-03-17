@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+   <link rel="stylesheet" href="/static/style1.css">
+   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+   <title>NGO Page</title>
+  </head>
+  <body>
+   
+   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+   <div class="container-fluid">
+    <a class="navbar-brand" href="/" >Sanjeevini</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <div class="navbar-nav mr-auto">
+     <a class="nav-link" href="/">Home</a>
+     <a class="nav-link" data-toggle="modal" data-target="#patient">Add patient</a>
+     <a class="nav-link" data-toggle="modal" data-target="#exampleModal">Add New Event</a>
+     <a class="nav-link" data-toggle="modal" data-target="#viewdetails">Patient Details</a>
+	   <!-- <div class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Share
+                </a>
+			  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+				  <div class="dropdown-content">
+          <a class="dropdown-item" href="/workapp/face/">Facebook</a>
+          </div>
+        </div>
+      </div> 
+      <div class="navbar-nav ml-auto">
+        </div>-->
+      </div>
+        <span><a class="nav-link" href="/workapp/ngo_logout">Logout</a></span>
+      </div>
+    </div>
+   </nav>
+   <div class="events container-fluid">
+   {% for message in messages %}
+   <div class="alert alert-info alert-dismissible fade show" role="alert">
+    <strong>{{message}}</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+    {% endfor %}
+   
+    <div class="detail" >
+      <div class="font-italic">
+      <h2>{{ngo.name}}</h2>
+      </div>
+      <h4>{{ngo.email}}</h4>
+      <h4>{{ngo.phone}}</h4>
+     <a href="{{ngo.link}}" target="_blank"> <h4>{{ngo.link}}</h4> </a>
+      <h4>{{ngo.text}}</h4>
+      </div>
+
+      <div class="row">
+        {% for i in eve %}
+          <hr style="height: 1px" noshade>
+          <div class="col-lg-4 col-sm-6">
+            <div class="card">
+            {% if i.img %}
+              <div >
+                <img class="card-img-top" src={{ i.img.url }}/ alt="Card image cap">
+              </div>
+            {% endif %}
+              <div class="card-body">
+                <h5 class="card-title">{{ i.name }}</h5>
+                <p class="card-text">{{ i.text }}</p>
+                  <div class="hspace">
+                  <span class="card-text">{{ i.venue }}</span>
+                  <span class="card-text">{{ i.city }}</span>
+                  </div>
+                  <div class="hspace">
+                  <span class="card-text">{{ i.date }}</span>
+                  <span class="card-text">{{ i.time }}</span>
+                  </div>
+                  <div class="buttondiv">
+                    <button type="button" class="btn btn-primary upload" id="{{ i.id }}" >
+                      Upload
+                    </button>
+                    <button type="button" class="btn btn-primary up" id="{{ i.id }}" data-toggle="modal" data-target="#update">
+                      Update Records
+                    </button>
+                    <a type="button" class="btn btn-primary doc" id="{{ i.id }}" href="/workapp/event_doc?eid={{i.id}}">
+                      Doctors List
+                    </a>
+                  </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      </div>
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">ADD EVENT</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="/workapp/eventreg/" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Event name:</label>
+            {{eform.name}}
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Venue:</label>
+            {{eform.venue}}
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">City:</label>
+            {{eform.city}}
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Number of docters required:</label>
+            {{eform.maxd}}
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Event Date:</label>
+            <input type="date" {{eform.date}}
+            
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Event Time:</label>
+            <input type="time" {{eform.time}}
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">About event:</label>
+            {{eform.text}}
+          </div>
+          <div class="form-group">
+              {{eform.img}}
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+	
+	
+	
+  
+  <div class="modal fade" id="viewdetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Enter Aadhar Number:</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="/workapp/viewdetails/" method="POST"> {% csrf_token %}
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Aadhar number:</label>
+              <input class="form-control" type="text" name="adharno">
+            </div>
+			<div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+			</form>
+			</div>
+			</div>
+			</div>
+			</div>
+
+
+  
+  <div class="modal fade" id="update" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Enter Patient Details</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form class="uf"> 
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Patient Aadhar Number: </label>
+              <input class="form-control" id="ad" type="text" name="adhar">
+            </div>
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Description: </label>
+              <textarea id="de" name="desc" class="form-control"></textarea>
+            </div>
+  
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary sub">Submit</button>
+            </div>
+  
+          </form>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="patient" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Enter Patient Details</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="/workapp/add_patient/" method="POST"> {% csrf_token %}
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Patient name:</label>
+              {{pform.name}}
+            </div>
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">City:</label>
+              {{pform.city}}
+            </div>
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Aadhar number</label>
+              {{pform.adhar_no}}
+            </div>
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Phone:</label>
+              {{pform.phone}}
+            </div>
+  
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+  
+          </form>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+  <script>
+    $(document).ready(function(){
+      $('.upload').click(function(){
+	    var id=this.id.toString();
+      $.ajax({
+        type:'GET',
+        url:'/workapp/face/',
+        data:{'id':id},
+        datatype:'json',
+        success:function(data){if (data.s=="success"){alert("success");}else {alert("failed")}},
+        })
+	    });
+
+    $('.up').click(function(){
+      var id=this.id.toString();
+      $('.sub').click(function(){
+        var a=$("#ad").val()
+        var d=$("#de").val()
+        $.ajax({
+        type:'GET',
+        url:'/workapp/update_rec/',
+        data:{'id':id,'a':a,'d':d},
+        datatype:'json',
+        success:function(data){if (data.s=="success"){alert("success");}else {alert("failed")}},
+        })
+    });
+    });
+    });
+	
+    </script>
+
+	
+</body>
+</html>
